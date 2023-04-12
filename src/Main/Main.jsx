@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const MainBox = styled.main`
-  border: 1px solid red;
   width: 100%;
   height: 100vh;
   display: flex;
@@ -25,17 +24,29 @@ const LinkTo = styled(Link)`
 `;
 
 function Main() {
+  const login = localStorage.getItem("access_token");
   return (
     <MainBox>
       <p>프리온보딩 프론트엔드 인턴십 과제</p>
-      <div>
-        <LinkTo to="/signin" className="btn-link">
-          로그인
-        </LinkTo>
-        <LinkTo to="/signup" className="btn-link">
-          회원가입
-        </LinkTo>
-      </div>
+      {login ? (
+        <div>
+          <LinkTo to="/todo" className="btn-link">
+            로그인
+          </LinkTo>
+          <LinkTo to="/todo" className="btn-link">
+            회원가입
+          </LinkTo>
+        </div>
+      ) : (
+        <div>
+          <LinkTo to="/signin" className="btn-link">
+            로그인
+          </LinkTo>
+          <LinkTo to="/signup" className="btn-link">
+            회원가입
+          </LinkTo>
+        </div>
+      )}
     </MainBox>
   );
 }
